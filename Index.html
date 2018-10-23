@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset="utf-8">
+    <title>TJApp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Emmanuel D C Santos">
+
+
+    <link href="System/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="System/font/css/font-awesome.min.css" rel="stylesheet">
+    <link href="System/css/TJApp_App.css" rel="stylesheet">
+    
+
+    <script src="System/js/jquery-3.2.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+    <script src="System/js/MAXCDN_bootstrap.min.js"></script>
+
+
+    <script src="System/js/jquery.flexslider.js"></script>
+    <script src="System/js/TJApp_App.js"></script>
+    <script src="System/js/TJApp_Acesso.js"></script>
+    <script src="System/js/TJApp_Modals.js"></script>
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+
+
+
+</head>
+
+<body>
+    <div id="fb-root"></div>
+    <div id="all">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+           <!-- <a class="navbar-brand" href="Index.html" style="width: 100%; text-align: center">WEB PERSONAL</a>-->
+        </nav>
+        <!--LOGIN-->
+        <div id="menu_Login" class="container" style="display: block;padding-top: 15%">
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 block-unit col-lg-offset-4 col-md-offset-4" style="background-color: slategray; margin-bottom: 10px; padding: 10px;">
+                <h4 style="color: white">ACESSAR</h4>
+                <form>
+                    <input id="FFusername" type="text" placeholder="EMAIL" class="form-control input-md inputform" style="margin-top: 10px">
+                    <input id="FFpassword" type="password" placeholder="SENHA" class="form-control input-md"  style="margin-top: 10px">
+                </form>  
+                <div id="divBtnLogin" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="display: block">
+                    <button id="BtnLogin"  class="btn btn-success btn-md btn-block fa fa-check" onclick="Login()"> ACESSAR</button>
+                </div>    
+                <div id="divBtnRegister" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="display: block">
+                    <button id="BtnRegister"  class="btn btn-danger btn-md btn-block fa fa-user-plus" onclick="NavegacaoDisplay('menu_Login','menu_Register')"> CRIAR USUÁRIO</button>
+                </div>
+                <button class="btn btn-link" onclick="NavegacaoDisplay('menu_Login','menu_Reiniciar_Senha')" style="color: white;">ESQUECI A SENHA</button>
+            </div> 
+        </div>
+        <div id="menu_Reiniciar_Senha" class="container"  style="display: none;padding-top: 15%">
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 col-lg-offset-4 col-md-offset-4" style="text-align:center; padding: 10px;background-color: slategray">
+                <h4 style="color: white">RECUPERAR SENHA</h4>
+                <input class="form-control input-md inputemail" type="text" placeholder="EMAIL" id="input_usuario_menu_Reiniciar_Senha" style="margin-top: 10px">
+                <button class="btn btn-success btn-md btn-block fa fa-share-square" onclick="Reiniciar_Senha()" style="margin-top: 10px;height: 50px" > ENVIAR SENHA</button>       
+                <button class="btn btn-danger btn-md btn-block fa fa-close" onclick="NavegacaoDisplay('menu_Reiniciar_Senha','menu_Login')" style="margin-top: 10px;height: 50px" > CANCELAR</button>
+            </div>
+        </div>
+        <div id="menu_Register" class="container" style="display: none;padding-top: 15%;">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 col-lg-offset-3 col-md-offset-3 " style="text-align:center;  margin-bottom: 10px; padding: 10px;background-color: slategray">
+                <h4 style="color: white">REGISTRAR-SE</h4>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 0px;">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 0px;">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top: 10px" >
+                            <input id="profedfisica" type="checkbox" value="1" checked="true" disabled="true" style="display: none">
+                        </div>
+                        <label class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-form-label" for="input_nome_novo_menu_Aluno">NOME</label>  
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <input id="input_criar_conta_nome" name="input_criar_conta_nome" type="text" placeholder="Nome completo" class="form-control input-md inputform" >
+                        </div>
+                    </div>
+                    <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 0px">
+                        <label class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-form-label" for="input_tel_cel_novo_menu_Aluno">CELULAR</label>  
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <input id="input_criar_conta_celular" name="input_criar_conta_celular" type="text" placeholder="99 99999-9999" class="form-control input-md" onkeypress="mascara(this, '## #####-####')" maxlength="13"> 
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 0px">
+                        <label class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-form-label" for="input_criar_conta_email">EMAIL</label>  
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <input id="input_criar_conta_email" name="input_criar_conta_email" type="text" placeholder="INFORME O SEU MELHOR E-MAIL" class="form-control input-md inputemail">
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 0px">
+                        <label class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-form-label" for="input_criar_conta_senha">SENHA</label>  
+                        <div class="input-group col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-left: 15px; padding-right: 15px">
+                            <input id="input_criar_conta_senha" name="input_criar_conta_senha" type="password" class="form-control input-md" placeholder="mín. 6 caracteres" aria-describedby="basic-addon2">
+                            <span  id="basic-addon2" class="input-group-addon"><button id="olho" class="btn-xs btn-primary btn-block fa fa-eye" ></button></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top: 10px" >
+                        <p style="color: white"><input id="InputPolPriv" type="checkbox" value="1" checked="true"> Aceito as condições da<button class="btn btn-link" onclick="javascript:window.open('PoliticaPrivacidade.html')" style="color: white;">POLÍTICA DE PRIVACIDADE</button></p>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 15px">
+                        <button class="btn btn-success btn-md btn-block fa fa-user-plus" id="btn_criar_conta" onclick="Register()" > CRIAR MEU USUÁRIO</button>
+                        <button class="btn btn-danger btn-md btn-block fa fa-close" onclick="NavegacaoDisplay('menu_Register','menu_Login')" style="margin-top: 10px;height: 50px" > CANCELAR</button>
+                    </div> 
+                </div>
+            </div>
+        </div> 
+        <div id="DashModal" style="display: block;background-color: #222222">
+            <div id="DashModalDiv" style="background-color: #222222">
+            </div>                                
+        </div>
+    </div>
+    <script>
+  //FUNÇÃO ENTER
+  var input = document.getElementById("FFpassword");
+  input.addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+      document.getElementById("BtnLogin").click();
+  }
+}); 
+    var senha = $('#input_criar_conta_senha');
+    var olho= $("#olho");
+
+    olho.mousedown(function() {
+      senha.attr("type", "text");
+  });
+
+    olho.mouseup(function() {
+      senha.attr("type", "password");
+  });
+$("#olho" ).mouseout(function() { 
+  $("#input_criar_conta_senha").attr("type", "password");
+});
+</script>
+</body>
+</html>

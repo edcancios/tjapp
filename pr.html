@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html><head>
+	<meta charset="utf-8">
+	<title>TJApp - RECUPERAR SENHA</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="author" content="Emmanuel D C Santos">
+
+	<link href="System/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+	<link href="System/font/css/font-awesome.min.css" rel="stylesheet">
+	<link href="System/css/TJApp_App.css" rel="stylesheet">
+
+	<script src="System/js/jquery-3.2.1.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<script src="System/js/jquery.flexslider.js"></script>
+	<script src="System/js/TJApp_App.js"></script>
+	<script src="System/js/TJApp_Acesso.js"></script>
+	<script src="System/js/TJApp_Modals.js"></script>
+
+</head>
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<a class="navbar-brand" href="Index.html">TJApp</a>    
+	</nav>
+	<div class="all">
+		<div class="container" style="display: block;padding-top: 15%">
+			<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 block-unit col-lg-offset-4 col-md-offset-4" style="background-color: slategray; margin-bottom: 10px; padding: 10px;">
+				<h4 style="color: white">ALTERAR SENHA</h4>    
+				<input id="InputPasswordNew" class="form-control input-md" type="password" placeholder="NOVA SENHA" style="margin-top: 10px">
+				<input id="InputPasswordNewConfirm" class="form-control input-md" type="password" placeholder="CONFIRME A NOVA SENHA" style="margin-top: 10px">
+				<button  class="btn btn-success btn-md btn-block fa fa-check" onclick="UpdatePassword()" style="margin-top: 10px"> ALTERAR</button>
+			</div> 
+			<div id="DashModal" style="display: block;background-color: #222222">
+				<div id="DashModalDiv" style="background-color: #222222">
+				</div>                                
+			</div>
+		</div>
+    </div>
+	</body>
+
+	</html>
