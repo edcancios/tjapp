@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <title>TJApp - MENU</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Emmanuel D C Santos">
+
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link href="font/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  <link href="css/TJApp_App.css" rel="stylesheet">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="js/MAXCDN_bootstrap.min.js"></script>
+
+
+  <script src="js/jquery.flexslider.js"></script>
+  <script src="js/TJApp_App.js"></script>
+  <script src="js/TJApp_Modals.js"></script>
+    
+    <style>
+        body{
+            padding: 5px;
+        }
+        button{
+            margin: 0px auto;
+            
+        }
+        div{
+            margin:0px auto;
+            margin-bottom: 5px;
+            padding: 5px;
+        }
+        input{
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+        
+        ul{
+            list-style-type: none;
+            margin: 0px auto;
+
+        }
+        li{
+            background-color: white;
+            margin: 0px auto;
+        }
+        label{
+            font-weight: bold;
+        }
+    </style>
+
+
+</head>
+<body style="background-color: #222222;">
+    
+    <div id="DashModal" style="display: block;background-color: #222222; ">
+    </div>
+    <div id="divButton" style="display: block;background-color: #222222; ">
+        <button type="button" class="btn btn-md btn-block btn-warning fa fa-id-card " style="display: block;" onclick="NavegacaoDisplay('divButton','infPess')" > INFORMAÇÕES</button>
+        <button id="btnProc" type="button" class="btn btn-md btn-block btn-default fa fa-gavel" onclick="NavegacaoDisplay('divButton','infProc')" style="display: block;"> PROCESSOS</button>
+    </div>
+    <div id="infPess" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="background-color: lightsalmon; height:auto;display: none;text-align: left">
+        <label for="inputNome" style="display: block">NOME COMPLETO</label>
+        <input id="inputNome" type="text" class="form-control">
+        <label for="selectIdent" style="display: block">TIPO DE IDENTIFICAÇÃO</label>
+        <select id="selectIdent" class="form-control">
+            <option value="0" selected>SELECIONE...</option>
+            <option value="1">ADVOGADO(A)</option>
+            <option value="2">FUNCIONÁRIO TJ</option>
+            <option value="3">USUÁRIO COMUM</option>
+        </select>
+        <label id="inputIdentLabel" for="inputIdent" style="display: none">IDENTIFICAÇÃO</label>
+        <input id="inputIdent" type="text" class="form-control" placeholder="MATRÍCULA / SETOR" style="display: none">
+        <button type="button" class="btn btn-md btn-block btn-success fa fa-check"  style="margin-bottom: 5px;display: block" onclick=" atualizaInf()"> ATUALIZAR</button>
+        <button type="button" class="btn btn-md btn-block btn-dark fa fa-undo-alt"  style="margin-bottom: 5px; display: block" onclick="NavegacaoDisplay('infPess','divButton')"> VOLTAR</button>        
+    </div>
+    <div id="infProc" class="col-lg-12 col-md-12 col-sm-12 col-xs-12"  style="background-color: lightblue; height:auto;display: none;">
+        <div id="infProcNovo" class="col-lg-12 col-md-12 col-sm-12 col-xs-12"  style="background-color: lightgray; height:auto;display: none;">
+            <label for="inputCliente" style="display: block">CLIENTE</label>
+            <input id="inputCliente" type="text" class="form-control">
+            <label for="inputOrigem" style="display: block">VARA / OFÍCIO / COMARCA</label>
+            <input id="inputOrigem" type="text" class="form-control">
+            <label for="inputProc" style="display: block">Nº DO PROCESSO</label>
+            <input id="inputProc" type="text" class="form-control">
+            <button type="button" class="btn btn-md btn-block btn-success fa fa-check"  style="margin-bottom: 5px" onclick="insereProc()"> INSERIR</button> 
+            <button type="button" class="btn btn-md btn-block btn-danger fa fa-close"  style="margin-bottom: 5px; display: block;width: " onclick="cancelaProc()"> CANCELAR</button>
+        </div>  
+        <label for="listaProc" style="display: block">PROCESSOS</label>
+        <button id="btnProcNovo" type="button" class="btn btn-md btn-block btn-primary fa fa-plus"  style="margin-bottom: 5px; display: block; " onclick="NavegacaoDisplay('btnProcNovo','infProcNovo')"> ADICIONAR PROCESSO</button>        
+        <ul id="listaProc" style="background-color: white; height: auto;margin-bottom: 5px" class="form-control" >
+        </ul>
+        <button type="button" class="btn btn-md btn-block btn-dark fa fa-undo-alt"  style="margin-bottom: 5px; display: block" onclick="NavegacaoDisplay('infProc','divButton')"> VOLTAR</button>
+    </div>
+    <div id="infProcInd" class="col-lg-12 col-md-12 col-sm-12 col-xs-12"  style="background-color: lightcoral; height: auto; display: none;">
+        <label for="ProcIndCliente" style="display: block">CLIENTE</label>
+        <h5 id="ProcIndCliente"></h5>
+        <label for="ProcIndOrigem" style="display: block">VARA / OFÍCIO / COMARCA</label>
+        <h5 id="ProcIndOrigem"></h5>
+        <label for="ProcInd" style="display: block">NÚMERO DO PROCESSO</label>
+        <h5 id="ProcInd"></h5>
+        <label for="listaProcIndTab" style="display: block">CÁLCULOS</label>
+        <ul id="listaProcIndTab" style="background-color: white; height: auto;margin-bottom: 5px" class="form-control">
+         </ul>
+        <button type="button" class="btn btn-md btn-block btn-primary fa fa-plus"  style="margin-bottom: 5px; display: block" onclick="NavegacaoDisplay('infProcInd','infProcIndCalcNovo')"> ADICIONAR CÁLCULO</button>
+        <button type="button" class="btn btn-md btn-block btn-dark fa fa-undo-alt"  style="margin-bottom: 5px; display: block" onclick="NavegacaoDisplay('infProcInd','infProc')"> VOLTAR</button>
+    </div>
+    <div id="infProcIndCalcNovo" class="col-lg-12 col-md-12 col-sm-12 col-xs-12"  style="background-color: yellowgreen; height: auto; display: none;">
+        <label for="ProcIndCalcNovoCliente" style="display: block">CLIENTE</label>
+        <h5 id="ProcIndCalcNovoCliente"></h5>
+        <label for="ProcIndCalcNovoOrigem" style="display: block">VARA / OFÍCIO / COMARCA</label>
+        <h5 id="ProcIndCalcNovoOrigem"></h5>
+        <label for="ProcIndCalcNovoNum" style="display: block">NÚMERO DO PROCESSO</label>
+        <h5 id="ProcIndCalcNovoNum"></h5>
+        <label for="ProcIndCalcNovoObj" style="display: block">OBJETO</label>
+        <input id="inputProcIndCalcNovoObj" type="text" class="form-control"> 
+        <label for="inputProcIndCalcNovoDtAtua" style="display: block">DATA DA ATUALIZAÇÃO</label>
+        <input id="inputProcIndCalcNovoDtAtua" type="date" class="form-control" onchange="atualizaIndice()">        
+        <label for="ProcIndDtAtuaIndice" style="display: block">ÍNDICE DATA DE ATUALIZAÇÃO</label>
+        <h5 id="ProcIndDtAtuaIndice">0.000000</h5>
+        <label for="inputProcIndCalcNovoHon" style="display: block">HONORÁRIOS</label>
+        <input id="inputProcIndCalcNovoHon" type="number" class="form-control" placeholder="0,00%">         
+        <label for="inputProcIndCalcNovoMulta" style="display: block">MULTA CONTRATUAL</label>
+        <input id="inputProcIndCalcNovoMulta" type="number" class="form-control"  placeholder="0,00%">
+        <label for="inputProcIndCalcNovoJurosMor" for="inputProcIndCalcNovoJurosMor" style="display: block">JUROS MORATÓRIA a.a</label>
+        <select id="inputProcIndCalcNovoJurosMor" class="form-control">
+            <option value="0" selected>SELECIONE...</option>
+            <option value="1">SIMPLES</option>
+            <option value="2">LEI 10.406</option>
+        </select>
+        <label id="inputProcIndCalcNovoJurosMorDesc" style="display: block;color: darkred"></label>
+        <label id="inputProcIndCalcNovoJurosMorSimplabel" for="inputProcIndCalcNovoJurosMorSimp" style="display: none">PERCENTUAL DE JUROS </label>
+        <input id="inputProcIndCalcNovoJurosMorSimp" type="number" class="form-control" style="display: none" placeholder="0,00%">
+        <label for="inputProcIndCalcNovoJuros" for="inputProcIndCalcNovoJuros" style="display: block">JUROS DA PARCELA</label>
+        <select id="inputProcIndCalcNovoJuros" class="form-control">
+            <option value="0" selected>SELECIONE...</option>
+            <option value="1">DATA DA PARCELA</option>
+            <option value="2">DATA FIXA</option>
+        </select>
+        <label id="inputProcIndCalcNovoJurosDesc" style="display: block;color: darkred"></label>
+        <label id="inputProcIndCalcNovoJurosDtFixalabel" for="inputProcIndCalcNovoJurosDtFixa" style="display: none">DATA FIXA DE JUROS</label>
+        <input id="inputProcIndCalcNovoJurosDtFixa" type="date" class="form-control" style="display: none">
+        <label for="inputProcIndCalcNovoTab" style="display: block">TABELA PRÁTICA DO TJ-SP A SER UTILIZADA</label>
+        <div class="input-group" id="inputProcIndCalcNovoTab">
+            <div style="text-align: left;color: white">               
+                    <label><input type="radio" name="tabela" value="1"> FAZENDAS PÚBLICAS</label>
+                <label style="margin-left: 15px ;text-align: justify; font-size: 14px;font-style: italic;color: darkred"> Vigente de 29/06/09 em diante (Lei nº 11.960/2009-Res. nº 510/2010) - MODULADA a partir de Abr/2015 - aplicando-se a TR de Ago/09 a Mar/2015 e IPCA-E de Abr/2015 em diante.                
+                </label>
+                <br>                    
+                    <label><input type="radio" name="tabela" value="2"> CALCULO ATUAL. MONETÁRIA</label>
+                <label style="margin-left: 15px ;text-align: justify; font-size: 14px;font-style: italic;color: darkred"> Vigente de 17/02/03 em diante aplicando-se 10,14% em Mar/89 (índice de fev/89) e INPC/IBGE de Ago/95 em diante.
+                </label>
+            </div>  
+        </div>
+        <label for="textProcIndCalcNovoObs" style="display: block">OBSERVAÇÕES</label>
+        <textarea id="textProcIndCalcNovoObs" style="width: 100%;" class="form-control"></textarea>
+        <label for="inputProcIndCalcNovoDtIni" style="display: block">DATA DO INÍCIO DAS PARCELAS</label>
+        <input id="inputProcIndCalcNovoDtIni" type="date" class="form-control">
+        <label for="inputProcIndCalcNovoDtFim" style="display: block">DATA DO FIM DAS PARCELAS</label>
+        <input id="inputProcIndCalcNovoDtFim" type="date" class="form-control">
+        
+        <button type="button" class="btn btn-md btn-block btn-success fa fa-calculator"  style="margin-bottom: 5px" onclick="calculaParc()"> CALCULAR</button>
+        <button type="button" class="btn btn-md btn-block btn-dark fa fa-undo-alt"  style="margin-bottom: 5px; display: block" onclick="NavegacaoDisplay('infProcIndCalcNovo','infProcInd')"> VOLTAR</button>
+    </div>     
+    <div id="infProcIndTab" class="col-lg-12 col-md-12 col-sm-12 col-xs-12"  style="background-color: grey; height: auto; display: none;">
+        <ul id="listaProcIndParcelas" style="background-color: lightgray; height: auto" class="form-control">
+            <li id="liTotais" style="display: block; height: 100%;text-align: left" class="form-control">
+                <h4>TOTAIS</h4>
+                <span>SUBTOTAL (<label style="font-size: 8px;font-style: italic;">CORRIGIDO + MULTA + JUROS</label>):</span>
+                <h4 id="TotalCorMulJur" style="text-align: right;color: darkred;"> R$ 0,00</h4>
+                <button class="btn btn-success btn-xs fa fa-plus" onclick="ExibirSuprimir('SubTotal1')" style="float: right;font-size: 10px"></button>
+                <br>
+                <div id="SubTotal1" style="text-align: left;display: none;width: 100%">
+                <span>VALOR CORRIGIDO + MULTA: </span>
+                <h6 id="TotalCorMul" style="text-align: right"> R$ 0,00</h6>
+                <span>JUROS:</span>
+                <h6 id="TotalJur" style="text-align: right"> R$ 0,00</h6>
+                </div>
+                <hr>
+                <span>SUBTOTAL (<label style="font-size: 8px;font-style: italic;">MULTA MORATÓRIA + HONORÁRIOS</label>):</span>
+                <h4 id="TotalMulMorHon" style="text-align: right;color: darkred;"> R$ 0,00</h4>
+                <button class="btn btn-success btn-xs fa fa-plus" onclick="ExibirSuprimir('SubTotal2')" style="float: right;font-size: 10px"></button>
+                <br>
+                <div id="SubTotal2" style="text-align: left;display: none;width: 100%">
+                    <span>MULTA MORATÓRIA<span style="font-size: 10px; font-style: italic"> (ART. 523)</span>:</span>
+                <h6 id="TotalMulMor" style="text-align: right"> R$0,00</h6>
+                <span>HONORÁRIOS:</span>
+                <h6 id="TotalHon" style="text-align: right"> R$ 0,00</h6>
+                </div>
+                <hr>
+                <span>A PAGAR:</span>
+                <h3 id="TotalPagar" style="color: darkred; text-align: right"> R$ 0,00</h3>
+            </li>
+
+        </ul>
+        <button id="btnSaveCalc" type="button" class="btn btn-md btn-success btn-block fa fa-save"  onclick="salvarCalculo()" style="display: none"> GUARDAR</button>
+        <button id="btnLimparCalc" type="button" class="btn btn-md btn-danger btn-block fa fa-close"  onclick="limparCalculo()" style="display: none"> LIMPAR</button>
+        <button id="btnDownPDF" type="button" class="btn btn-md btn-danger fa fa-file-pdf btn-block"  onclick="" style="display: none"> DOWNLOAD PDF</button>
+        <button id="btnEnviaEmail" type="button" class="btn btn-md btn-primary fa fa-envelope btn-block"  onclick="" style="display: none"> ENVIAR POR EMAIL</button>
+    </div>
+
+    <div id="DashModalDiv" style="background-color: #222222">
+    </div>                                
+</body>
+    <script>
+    $("#selectIdent").on('change', function(e){
+        var value = $(this).val();
+        if(value == 0){
+            $("#inputIdent").css("display", "none");
+            $("#inputIdentLabel").css("display", "none");
+            $("#inputIdent").attr("placeholder", "");
+        }else if(value == 1){
+            $("#inputIdent").css("display", "block");
+            $("#inputIdentLabel").css("display", "block");
+            $("#inputIdent").attr("placeholder", "OAB");
+        }else if(value == 2){
+            $("#inputIdent").css("display", "block");
+            $("#inputIdentLabel").css("display", "block");
+            $("#inputIdent").attr("placeholder", "MATRÍCULA / SETOR");
+        }else if(value == 3){
+            $("#inputIdent").css("display", "block");
+            $("#inputIdentLabel").css("display", "block");
+            $("#inputIdent").attr("placeholder", "RG / CPF");
+        }
+  return false;
+});
+        
+    $("#inputProcIndCalcNovoJurosMor").on('change', function(e){
+        var value = $(this).val();
+        if(value == 0){
+            $("#inputProcIndCalcNovoJurosMorSimp").css("display", "none");
+            $("#inputProcIndCalcNovoJurosMorSimplabel").css("display", "none");
+            $("#inputProcIndCalcNovoJurosMorDesc").text("");
+        }else if(value == 1){
+            $("#inputProcIndCalcNovoJurosMorSimp").css("display", "block");
+            $("#inputProcIndCalcNovoJurosMorSimplabel").css("display", "block");
+            $("#inputProcIndCalcNovoJurosMorDesc").text("Percentual de juros igual para todo o período.");
+        }else if(value == 2){
+            $("#inputProcIndCalcNovoJurosMorSimp").css("display", "none");
+            $("#inputProcIndCalcNovoJurosMorSimplabel").css("display", "none");
+            $("#inputProcIndCalcNovoJurosMorDesc").text(" Lei 10.406 ( Novo Código Civil), ou seja: 6% até  10/01/03 e 12% a partir de 11/01/03.");
+        }
+        return false;
+    });
+        
+    $("#inputProcIndCalcNovoJuros").on('change', function(e){
+        var value = $(this).val();
+        if(value == 0){
+            $("#inputProcIndCalcNovoJurosSimp").css("display", "none");
+            $("#inputProcIndCalcNovoJurosSimplabel").css("display", "none");
+            $("#inputProcIndCalcNovoJurosDesc").text("");
+        }else if(value == 1){
+            $("#inputProcIndCalcNovoJurosSimp").css("display", "none");
+            $("#inputProcIndCalcNovoJurosSimplabel").css("display", "none");
+            $("#inputProcIndCalcNovoJurosDesc").text("Contagem dos juros a partir da data da parcela.");
+        }else if(value == 2){
+            $("#inputProcIndCalcNovoJurosDtFixa").css("display", "block");
+            $("#inputProcIndCalcNovoJurosDtFixalabel").css("display", "block");
+            $("#inputProcIndCalcNovoJurosDesc").text("Contagem dos juros a partir de data fixa");
+        }
+        return false;
+    });
+    //dataAtual('inputProcIndCalcNovoDtAtua');
+        listaProc();
+    </script>
+</html>
